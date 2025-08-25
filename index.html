@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Rini 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
+    overflow-x: hidden;
+    color: #333;
+  }
+
+  .section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    transition: opacity 1s ease, transform 1s ease;
+    opacity: 0;
+    transform: translateY(50px);
+    text-align: center;
+  }
+
+  .visible { opacity: 1; transform: translateY(0); }
+
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    color: #ff3366;
+    margin-bottom: 20px;
+  }
+
+  .message {
+    font-size: 1.5em;
+    line-height: 1.6;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .heart-button {
+    font-size: 4em;
+    cursor: pointer;
+    margin-top: 30px;
+  }
+
+  .heart-button:hover { transform: scale(1.2); transition: 0.3s; }
+
+  .petal {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    user-select: none;
+    animation: float 10s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(120vh) rotate(360deg); opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="section visible">
+    <h1>Happy Birthday Rini! 🌹🧸💖</h1>
+  </div>
+
+  <div class="section">
+    <div class="message">
+      My dearest Rini,<br><br>
+      Wishing you a day filled with love, laughter, and all the happiness in the world! 🥰🌸🌷<br>
+      May your heart be as joyful as the smiles you bring me every day. 💕🧸🌹<br><br>
+      Lots of love,<br>
+      <b>SAIKAT</b>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="message">
+      Here’s to a year full of adventures, smiles, and sweet memories together! 🌼💖🌸🧸
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="heart-button" onclick="showLove()">💖🌹🧸🌸</span>
+    <div class="message" id="finalMessage" style="display:none; margin-top:20px;">
+      Rini, you mean the world to me! Happy Birthday, my love! 🎉💖🧸🌹🌸
+    </div>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bgMusic" loop>
+    <source src="A_Thousand_Years.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+<script>
+  // Scroll animation
+  const sections = document.querySelectorAll('.section');
+  window.addEventListener('scroll', () => {
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if(top < window.innerHeight - 100){
+        sec.classList.add('visible');
+      }
+    });
+  });
+
+  // Show love message
+  function showLove() {
+    document.getElementById('finalMessage').style.display = 'block';
+  }
+
+  // Floating petals/emojis
+  const emojis = ['🌹','🌸','🧸','💖','🌼','🌷'];
+  for(let i=0;i<60;i++){
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    petal.style.left = Math.random()*100+'vw';
+    petal.style.top = Math.random()*-50+'vh';
+    petal.style.fontSize = (15+Math.random()*25)+'px';
+    petal.style.animationDuration = (5+Math.random()*10)+'s';
+    document.body.appendChild(petal);
+  }
+
+  // Play music after a small delay and start from 1:15
+  window.addEventListener('load', () => {
+    const music = document.getElementById('bgMusic');
+    music.currentTime = 75; // start at 1 min 15 sec
+    music.play().catch(() => {
+      // Some browsers require a user gesture to play audio
+      console.log('Tap anywhere to start music!');
+      document.body.addEventListener('click', () => music.play());
+    });
+  });
+</script>
+
+</body>
+</html>
